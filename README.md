@@ -10,18 +10,18 @@ This project simulates a production-grade backend design using **Cache-Aside Cac
 
 ```mermaid
 graph TD
-    Client[React Frontend - Nginx] -->|1. GET /api/suggestions?q=prefix| Backend[Spring Boot Backend]
-    Client -->|2. POST /api/search {query}| Backend
+    Client["React Frontend (Nginx)"] -->|"1. GET /api/suggestions?q=prefix"| Backend["Spring Boot Backend"]
+    Client -->|"2. POST /api/search {query}"| Backend
     
-    Backend -->|A. Hashing Routing| CHS[Consistent Hashing Service]
-    CHS -->|Route Key| NodeSelection[Locate Redis Node]
+    Backend -->|"A. Hashing Routing"| CHS["Consistent Hashing Service"]
+    CHS -->|"Route Key"| NodeSelection["Locate Redis Node"]
     
-    NodeSelection -->|B. Cache Lookup| Redis[(Redis Server)]
+    NodeSelection -->|"B. Cache Lookup"| Redis[("Redis Server")]
     
-    Backend -->|C. Batch Buffer| MemoryQueue[Concurrent HashMap Buffer]
-    MemoryQueue -->|D. Flush every 30s| PostgreSQL[(PostgreSQL DB)]
+    Backend -->|"C. Batch Buffer"| MemoryQueue["Concurrent HashMap Buffer"]
+    MemoryQueue -->|"D. Flush every 30s"| PostgreSQL[("PostgreSQL DB")]
     
-    Backend -->|E. DB Fallback| PostgreSQL
+    Backend -->|"E. DB Fallback"| PostgreSQL
 ```
 
 ### Key Architectural Pillars
@@ -145,7 +145,4 @@ Submit a search query. This increments the query's popularity count.
 
 ---
 
-## 🎓 Viva & Reference Guides
-We have compiled two dedicated resources to help you study and prepare for presentations:
-* **Academic Viva Q&A**: [VIVA_GUIDE.md](file:///home/jenil/Desktop/SearchTypeHead/VIVA_GUIDE.md)
-* **Telemetry & Benchmarks**: [PERFORMANCE_REPORT.md](file:///home/jenil/Desktop/SearchTypeHead/PERFORMANCE_REPORT.md)
+
